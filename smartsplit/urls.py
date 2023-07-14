@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import welcome
+from .views import Welcome
 
 urlpatterns = [
-    path("", welcome, name="home") # when a user visits websitName.com/ they will be directed to the view, welcome
+    path("", Welcome.as_view(), name="home") # when a user visits websitName.com/ they will be directed to the view, welcome
 ]
