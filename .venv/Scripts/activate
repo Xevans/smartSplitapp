@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\evans\Documents\programs\dJango\CIS376\.venv"
+VIRTUAL_ENV="C:\Users\evans\OneDrive\Documents\programs\django\SmartSplit project\smartSplitapp\.venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
