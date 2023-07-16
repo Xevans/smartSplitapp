@@ -2,7 +2,13 @@
 
 {% extends "base.html" %} 
 
+{% block title %} SmartSplit | Home {% endblock %}
 
 {% block content %}
-<h1>Home Page</h1>
+{% if user.is_authenticated %}
+    <h1>Home Page</h1>
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log in</a>
+{% endif %}
 {% endblock content %}
