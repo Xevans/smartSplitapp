@@ -1,2 +1,4 @@
 run virtual environment: .venv\Scripts\Activate.ps1
 Run server: python manage.py runserver
+super user creds: admin admin
+additional users: xavier123, D******13#

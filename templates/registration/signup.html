@@ -1,11 +1,14 @@
-<!-- templates/welcome.html-->
 {% extends "nonauth_base.html" %} 
 
 {% block title %} SmartSplit | Sign Up {% endblock %}
 
-
 {% block content %} 
 
-<h1>Welcome Page</h1>
+<h2>Sign Up</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign Up</button>
+</form>
 
 {% endblock content %}
