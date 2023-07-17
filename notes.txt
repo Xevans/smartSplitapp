@@ -2,3 +2,16 @@ run virtual environment: .venv\Scripts\Activate.ps1
 Run server: python manage.py runserver
 super user creds: admin admin
 additional users: xavier123, D******13#
+
+setting up venv:
+1. in powershell run 'python -m venv .venv'
+2. run .venv\Scripts\Activate.ps1
+2.5 if you get a script running denial/error run this line: 'Set-ExecutionPolicy -Scope CurrentUser Unrestricted' then try step 2 again
+3. when in venv, pip install python, black, and django
+    3.1 python -m pip install black
+    3.2 python -m pip install django
+
+
+Thoughts...
+User account system. Will need a user model and a profile model that imports user
+Profile model will hold process related info
