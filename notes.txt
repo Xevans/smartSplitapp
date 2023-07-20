@@ -15,3 +15,5 @@ setting up venv:
 Thoughts...
 User account system. Will need a user model and a profile model that imports user
 Profile model will hold process related info
+
+dan changed this
