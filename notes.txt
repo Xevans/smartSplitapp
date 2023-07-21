@@ -1,5 +1,4 @@
 run virtual environment: .venv\Scripts\Activate.ps1
-Run server: python manage.py runserver
 super user creds: admin admin
 additional users: xavier123, D******13#
 
@@ -11,9 +10,23 @@ setting up venv:
     3.1 python -m pip install black
     3.2 python -m pip install django
 
+Commands:
+- Run server: python manage.py runserver
+- Create a new app: 'python manage.py startapp appName'
 
 Thoughts...
 User account system. Will need a user model and a profile model that imports user
 Profile model will hold process related info
-
+ 
 Xavier's Branch test
+
+
+July 21
+
+The custom user tutorial is an alternative way to handle logins and logouts. We will want to replace the old login system with the custom one.
+We can then assign more fields to a user like email, DOB, username, password, etc. Do not run server or migrate or existing auth stuff will clash.
+
+--
+
+New login system tested and working with a super user, and an account form myself.
+The next step is to delete the database and create more feilds to ubtain from the user at sign up.
