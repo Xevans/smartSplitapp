@@ -1,11 +1,42 @@
 <!-- templates/welcome.html-->
-{% extends "nonauth_base.html" %} 
+{% extends "nonauth_base.html" %}
 
 {% block title %} SmartSplit | Sign Up {% endblock %}
 
 
-{% block content %} 
+{% block content %}
 
-<h1>Welcome Page</h1>
+<br><br><br><br>
+<div class="container text-center">
+    <div class="row align-items-center">
+        <div class="col">
+            <!--TAB-->
+        </div>
+        <div class="col">
+            <!--Card-->
+            <div class="card" style="width: 500px; width: 48rem;">
+                <img src="https://dlp31coh2a67q.cloudfront.net/eyJrZXkiOiJ1cGxvYWRzL21lZGl1bS9hc3NldC83MzQyL2RvbGxhcl9iaWxsX3NwbGl0LmpwZyIsImJ1Y2tldCI6Im9zbG8tcHJvZHVjdGlvbiIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTAwMCwiaGVpZ2h0IjpudWxsfX19"
+                    class="card-img-top" alt="Split dollar">
+                <div class="card-body">
+                    <h2 class="card-title">Welcome</h2>
+                    <p class="card-text; font-size: 24px;">Don't stress, share your expense! This website was built to
+                        help
+                        you split your bills between your friends, girlfriend, or anyone!
+                    </p>
+                    <a href="{% url 'signup' %}" class="btn btn-primary">Sign up now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <!--TAB-->
+        </div>
+    </div>
+
+    <!-----------------------------FIXED BOTTOM------------------------------------->
+    <div class="fixed-bottom">
+        <h3>This is the end of the page</h3>
+    </div>
+</div> <!-- Fixed bottom page-->
+
 
 {% endblock content %}
