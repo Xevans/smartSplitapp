@@ -1,14 +1,66 @@
-{% extends "nonauth_base.html" %} 
+{% extends "nonauth_base.html" %}
 
 {% block title %} SmartSplit | Sign Up {% endblock %}
 
-{% block content %} 
+{% block content %}
 
-<h2>Sign Up</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign Up</button>
-</form>
+<style>
+    label {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 400px;
+        line-height: 26px;
+        margin-bottom: 10px;
+    }
+
+    li {
+        white-space: nowrap;
+    }
+
+    body {
+        background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+            url('https://cdn1.iconfinder.com/data/icons/online-money-service-aesthetics-vol-2/256/Split_Bill-512.png')
+    }
+</style>
+<br /><br /><br /><br />
+<div class="mx-auto p-2" style="width: 800px;">
+    <div class="card text-center mb-3; card border-success mb-3" style="width: 48rem;">
+        <div class="card-body">
+            <h2 class="card-title">Sign up</h2> <br />
+            <form>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="username" placeholder="Enter A Good Username">
+                    <div id="emailHelp" class="form-text">Requirements: 150 characters or fewer. Letters, Digits, and
+                        @/./+/-/_ only.
+                    </div>
+                    <br />
+                    <div class="mb-3">
+                        <input type="password" class="form-control" name="password" placeholder="Enter A Good Password">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <div id="emailHelp" class="form-text">Your password can't be too similar to your other personal
+                            information.
+                            <br>Your password must contain at least 8 characters.
+                            <br>Your password can't be a commonly used password.
+                            <br>Your password can't be entirely numeric.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <input type="password" class="form-control" name="passwordcheck"
+                        placeholder="Re-Enter Your Password">
+                </div>
+                <div class="mb-3 form-check">
+                    <div id="emailHelp" class="form-text">For verification, enter the same password as before.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign up</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 {% endblock content %}

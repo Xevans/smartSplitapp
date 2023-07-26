@@ -1,14 +1,41 @@
-{% extends "nonauth_base.html" %} 
+{% extends "nonauth_base.html" %}
 
 {% block title %} SmartSplit | Log In {% endblock %}
 
-{% block content %} 
+{% block content %}
 
-<h2>Log In</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Log In</button>
-</form>
+<style>
+    img {
+        width: 100%;
+        height: auto;
+    }
 
+    body {
+        background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+            url('https://cdn1.iconfinder.com/data/icons/online-money-service-aesthetics-vol-2/256/Split_Bill-512.png')
+    }
+</style>
+
+<br />
+<br /><br /><br /><br />
+<div class="mx-auto p-2" style="width: 600px;">
+    <div class="card border-success mb-3" style="width: 38rem;">
+        <div class="card-body">
+            <h2 class="text-center">Log In</h2>
+            <br />
+            <form method="post">
+                {% csrf_token %}
+                <form>
+                    <div class="                        mb-3">
+                        <input type="text" class="form-control" name="username" placeholder="Enter Your Username">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" name="password" placeholder="Enter Your Password">
+                    </div>
+                    <br />
+                    <button type="submit" class="btn btn-success">Log in</button>
+                </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}
