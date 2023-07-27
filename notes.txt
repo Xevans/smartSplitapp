@@ -9,6 +9,7 @@ setting up venv:
 3. when in venv, pip install python, black, and django
     3.1 python -m pip install black
     3.2 python -m pip install django
+    3.2 python -m pip install pillow
 
 Commands:
 - Run server: python manage.py runserver
