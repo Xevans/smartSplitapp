@@ -1,6 +1,6 @@
 run virtual environment: .venv\Scripts\Activate.ps1
 super user creds: admin admin
-additional users: xavier123, D******13#
+additional users: xevans, D******13#
 
 setting up venv:
 1. in powershell run 'python -m venv .venv'
@@ -33,3 +33,9 @@ New login system tested and working with a super user, and an account form mysel
 The next step is to delete the database and create more feilds to ubtain from the user at sign up.
 
 -- left off figuring out how to make a edit profile page. Watch: https://www.youtube.com/watch?v=F5kTZdi_c5k
+
+
+July 27
+
+New authentication system is now running. The purpose of this new system is to allow the user model built into dango's authentication package to be
+extended to a costom model called Profile. That will hold user attributes.
