@@ -14,5 +14,7 @@ class Homepage(TemplateView):
 
 
 def account(request):
-    context = {'test':Profile.objects.all()}
-    return render(request, "account.html", context)
+    #request.user.profile.balance -= 1.00
+    #request.user.save()
+
+    return render(request, "account.html")
