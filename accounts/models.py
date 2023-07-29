@@ -9,14 +9,13 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(default='default.jpg', upload_to='profile_pictures')
     bio = models.TextField()
-
-    #test_identifier = models.CharField(max_length=40, unique=False)
     #groups
-    #total balances owed
+    balance = models.FloatField(default=5.00)
+    dues = models.FloatField(default=1.00)
     #phone number
 
     def __str__(self):
-        return self.username
+        return self.user.username
     
     #image resizing
     def save(self, *args, **kwargs):

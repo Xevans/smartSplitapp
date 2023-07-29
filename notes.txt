@@ -39,3 +39,14 @@ July 27
 
 New authentication system is now running. The purpose of this new system is to allow the user model built into dango's authentication package to be
 extended to a costom model called Profile. That will hold user attributes.
+
+Possibility:
+Adding a user balance: would need to create another extension of the default user profile and
+prep attributes such as balance, dues, etc.
+User entered info would contain, Bank, acc no., route no., cards
+
+Simplified route due to time constraints:
+Add attributes (balances, dues) to existing profile model.
+
+Group model:
+will be a many to many association. (So many user ID's to many groups).
