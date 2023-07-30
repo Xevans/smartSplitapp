@@ -12,6 +12,8 @@ class Profile(models.Model):
     #groups
     balance = models.FloatField(default=5.00)
     dues = models.FloatField(default=1.00)
+    #user_name = models.CharField(max_length=100, default)
+    # this_user = models.ForeignKey(User, on_delete=models.CASCADE)
     #phone number
 
     def __str__(self):

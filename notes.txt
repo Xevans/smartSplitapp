@@ -1,6 +1,6 @@
 run virtual environment: .venv\Scripts\Activate.ps1
 super user creds: admin admin
-additional users: xevans, D******13#
+additional users: xevans, D******13#; ace_blue01, Sy*****13#
 
 setting up venv:
 1. in powershell run 'python -m venv .venv'
@@ -50,3 +50,31 @@ Add attributes (balances, dues) to existing profile model.
 
 Group model:
 will be a many to many association. (So many user ID's to many groups).
+
+July 29
+
+(Skipping for now) Next goal is to create a Friending system so that any two users can add each other as friends.
+Ideally this would involve doing a lookup for the person's user name and sending that ID a request
+When the reciever acknowledges that request (accepts) the sender's model is now associated 
+with the reciever's ID.
+
+The friending step will be skipped for the time being to save time. 
+Instead, the next goal for the prototype is to send money from one user to another
+This would ideally require a form-POST-request that contains the amount and the username of the reciever.
+
+July 30
+
+Notification system:
+send request for payment to recipient....
+during POST create a request instance (based on a model), associated with the provided username
+when the recipient goes to notifications page...
+GET request
+for each notification, display request
+payment requests contain...
+sender username, amount, recipient name
+
+
+Front End todo's
+
+Add a: Hello (name) your balance is (balance) on account page
+Add a: your new balance is (balance), (name).

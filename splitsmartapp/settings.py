@@ -133,3 +133,5 @@ LOGOUT_REDIRECT_URL = "welcome"
 LOGIN_URL = 'login'
 
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
+
+AUTH_PROFILE_MODULE = 'accounts.Profile'

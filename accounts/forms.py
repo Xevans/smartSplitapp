@@ -3,10 +3,11 @@ from django.contrib.auth.models import User
 from django import forms
 from .models import Profile
 
+# create your forms
 
 class RegistrationForm(UserCreationForm):
 
-    #user fields here
+    #user registration fields here
     first_name = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'placeholder': 'First Name', 'class': 'form-control'}))
     last_name = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'placeholder': 'Last Name', 'class': 'form-control'}))    
     username = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'placeholder': 'Username', 'class': 'form-control'}))
