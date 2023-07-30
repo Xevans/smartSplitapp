@@ -1,7 +1,6 @@
 run virtual environment: .venv\Scripts\Activate.ps1
-Run server: python manage.py runserver
 super user creds: admin admin
-additional users: xavier123, D******13#
+additional users: xevans, D******13#; ace_blue01, Sy*****13#
 
 setting up venv:
 1. in powershell run 'python -m venv .venv'
@@ -10,8 +9,72 @@ setting up venv:
 3. when in venv, pip install python, black, and django
     3.1 python -m pip install black
     3.2 python -m pip install django
+    3.2 python -m pip install pillow
 
+Commands:
+- Run server: python manage.py runserver
+- Create a new app: 'python manage.py startapp appName'
 
 Thoughts...
 User account system. Will need a user model and a profile model that imports user
 Profile model will hold process related info
+ 
+Xavier's Branch test
+
+
+July 21
+
+The custom user tutorial is an alternative way to handle logins and logouts. We will want to replace the old login system with the custom one.
+We can then assign more fields to a user like email, DOB, username, password, etc. Do not run server or migrate or existing auth stuff will clash.
+
+--
+
+New login system tested and working with a super user, and an account form myself.
+The next step is to delete the database and create more feilds to ubtain from the user at sign up.
+
+-- left off figuring out how to make a edit profile page. Watch: https://www.youtube.com/watch?v=F5kTZdi_c5k
+
+
+July 27
+
+New authentication system is now running. The purpose of this new system is to allow the user model built into dango's authentication package to be
+extended to a costom model called Profile. That will hold user attributes.
+
+Possibility:
+Adding a user balance: would need to create another extension of the default user profile and
+prep attributes such as balance, dues, etc.
+User entered info would contain, Bank, acc no., route no., cards
+
+Simplified route due to time constraints:
+Add attributes (balances, dues) to existing profile model.
+
+Group model:
+will be a many to many association. (So many user ID's to many groups).
+
+July 29
+
+(Skipping for now) Next goal is to create a Friending system so that any two users can add each other as friends.
+Ideally this would involve doing a lookup for the person's user name and sending that ID a request
+When the reciever acknowledges that request (accepts) the sender's model is now associated 
+with the reciever's ID.
+
+The friending step will be skipped for the time being to save time. 
+Instead, the next goal for the prototype is to send money from one user to another
+This would ideally require a form-POST-request that contains the amount and the username of the reciever.
+
+July 30
+
+Notification system:
+send request for payment to recipient....
+during POST create a request instance (based on a model), associated with the provided username
+when the recipient goes to notifications page...
+GET request
+for each notification, display request
+payment requests contain...
+sender username, amount, recipient name
+
+
+Front End todo's
+
+Add a: Hello (name) your balance is (balance) on account page
+Add a: your new balance is (balance), (name).

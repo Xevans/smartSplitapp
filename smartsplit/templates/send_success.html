@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %} SmartSplit | Sent Sucessfully {% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1>Payment Sent</h1>
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log in</a>
+{% endif %}
+
+<h2>Your balance: {{request.user.profile.balance}}</h2>
+{% endblock content %}

@@ -1,0 +1,60 @@
+{% extends "nonauth_base.html" %} 
+
+{% block title %} SmartSplit | Log In {% endblock %}
+
+{% block content %} 
+
+<div class="container-fluid">
+    {% if form.errors %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <div id="form_errors">
+            {% for key, value in form.errors.items %}
+                <strong>{{ value }}</strong>
+            {% endfor %}
+        </div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+    <h2 class="offset-md-3">Log In</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col-md-6 offset-md-3">
+                <div class="form-group">
+                    <label class="small mb-1">Username</label>
+                    {{ form.username }}
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 offset-md-3">
+                <div class="form-group">
+                  <label class="small mb-1">Password</label>
+                  {{ form.password }}
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-10 offset-md-3">
+                <div class="form-group">
+                    {{ form.remember_me }}
+                    <label> Remember me</label>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="offset-md-5">
+                <button name="login" class="col-md-2 btn btn-outline-success" id="login" type="submit">Sign in</button>
+                <a href="{% url 'password_reset' %}"><button name="forgot_pw" class="col-md-2 btn btn-outline-secondary" >Forgot password</button></a>
+            </div>
+        </div>
+    </form>
+    <br>
+    <a class="offset-md-3" href="{% url 'signup' %}">Don't have an account yet? Go to signup</a><br>
+</div>
+
+
+{% endblock content %}
