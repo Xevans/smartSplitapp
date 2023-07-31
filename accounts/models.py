@@ -19,6 +19,8 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
     
+
+    
     #image resizing
     def save(self, *args, **kwargs):
         super().save()
@@ -29,7 +31,5 @@ class Profile(models.Model):
             new_img = (100, 100)
             img.thumbnail(new_img)
             img.save(self.avatar.path)
-    
-
 
 

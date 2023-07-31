@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} SmartSplit | My Account {% endblock %}
+{% block title %} SmartSplit | Send Cash {% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
@@ -19,6 +19,10 @@
         </button>
     </div>
     {% endif %}
+<!--
+    {{request.user.requests.message}} 
+    {{request.user.requests.req_amnt}}-->
+
     <h2 class="offset-md-4">Send cash to a friend</h2>
     <br>
     <form method="POST">
@@ -37,6 +41,15 @@
                 <div class="form-group">
                   <label class="form-label">Recipient Username</label>
                   {{ form.recipient }}
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="col-md-6 offset-md-4">
+                <div class="form-group">
+                  <label class="form-label">Purpose</label>
+                  {{ form.message }}
                 </div>
             </div>
         </div>

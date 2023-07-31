@@ -75,6 +75,17 @@ sender username, amount, recipient name
 
 
 Front End todo's
-
 Add a: Hello (name) your balance is (balance) on account page
 Add a: your new balance is (balance), (name).
+
+July 31
+Fixed issue with request table not existing. Wasn't migrating smartsplit models. (kept migrating accounts)
+Requests should not be a signal for on user create. Nor should a request object be mode for every
+created user.
+Requests objects will be made by the program when a valid form-post is made on the requests page.
+
+Rewrite homepage to show notifications of pay Requests
+basically, when the clint sends a get request from the home page.
+The function checks the global requests table to see if there is an entry with their username
+if there is, show it,(add django markup in html) if not, render normally.
+
