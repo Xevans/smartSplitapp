@@ -1,0 +1,184 @@
+{% extends "nonauth_base.html" %}
+
+{% block title %} SmartSplit | Sign Up {% endblock %}
+
+{% block content %}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Raleway', sans-serif;
+        background-color: #000;
+    }
+
+    .text-container {
+        height: 30vh;
+        width: 80vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .text-container h1 {
+        margin: 0;
+        font-size: 150px;
+        color: rgba(225, 225, 225, .01);
+        background-image: url("https://wallpapercave.com/wp/wp3469892.jpg");
+        background-repeat: repeat;
+        -webkit-background-clip: text;
+        animation: animate 15s ease-in-out infinite;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 900;
+    }
+
+    @keyframes animate {
+
+        0%,
+        100% {
+            background-position: left top;
+        }
+
+        25% {
+            background-position: right bottom;
+        }
+
+        50% {
+            background-position: left bottom;
+        }
+
+        75% {
+            background-position: right top;
+        }
+    }
+
+    .white_text {
+        font-size: 25px;
+        color: white;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Background animation</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:900" rel="stylesheet">
+</head>
+
+
+<body style="background-color:#4f7a57;">
+    <div class="container-fluid">
+        <form method="POST">
+            {% csrf_token %}
+            {% if form.errors %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <div id="form_errors">
+                    {% for key, value in form.errors.items %}
+                    <strong>{{ value }}</strong>
+                    {% endfor %}
+                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %}
+            <div class="text-container">
+                <h1><b>Sign up</b></h1>
+                <p style="font-size:88px">&#129331;</p>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5 offset-md-3">
+                    <div class="form-group">
+                        <label class="small mb-1"><span class="white_text">First Name</span></label>
+                        {{ form.first_name }}
+                        <br>
+                    </div>
+                </div>
+                <div class="col-md-5 offset-md-3">
+                    <div class="form-group">
+                        <label class="small mb-1"><span class="white_text">Last Name</span></label>
+                        {{ form.last_name }}
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5 offset-md-3">
+                    <div class="form-group">
+                        <label class="small mb-1"><span class="white_text">Username</span></label>
+                        {{ form.username }}
+                        <br>
+                    </div>
+                </div>
+                <div class="col-md-5 offset-md-3">
+                    <div class="form-group">
+                        <label class="small mb-1"><span class="white_text">Email</span></label>
+                        {{ form.email }}
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5 offset-md-3">
+                    <div class="form-group">
+                        <label class="small mb-1"><span class="white_text">Password</span></label>
+                        <div class="container text-center">
+                            <div class="row align-items-center">
+                                <div class="card text-center mb-3; card border-success mb-3" style="width: 100rem;">
+                                    <div class="card-body">
+                                        <div class="mb-3 form-check">
+                                            <div id="emailHelp" class="form-text">Your password can't be too similar to
+                                                your
+                                                other personal
+                                                information.
+                                                <br>Your password must contain at least 8 characters.
+                                                <br>Your password can't be a commonly used password.
+                                                <br>Your password can't be entirely numeric.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{ form.password1 }}
+                        {{ form.errors.password }}
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 offset-md-3">
+                <div class="form-group">
+                    <label class="small mb-1"><span class="white_text">Confirm Password</span></label>
+                    <div class="container text-center">
+                        <div class="row align-items-center">
+                            <div class="card text-center mb-3; card border-success mb-3" style="width: 100rem;">
+                                <div class="card-body">
+                                    <div class="mb-3 form-check">
+                                        <div id="emailHelp" class="form-text">For verification, enter the same password
+                                            as
+                                            before.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form.password2 }}
+
+                </div>
+            </div>
+    </div>
+    <br>
+    <div class="form-group">
+        <div class="offset-md-5">
+            <button type="submit" class="col-md-2 btn btn-primary">Sign Up</button><br><br>
+        </div>
+    </div>
+    </form>
+    </div>
+</body>
+
+
+{% endblock content %}

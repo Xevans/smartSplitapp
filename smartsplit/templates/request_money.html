@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %} SmartSplit | Request Money {% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1>Request Money</h1>
+
+<div class="container-fluid">
+    {% if form.errors %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <div id="form_errors">
+            {% for key, value in form.errors.items %}
+                <strong>{{ value }}</strong>
+            {% endfor %}
+        </div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+    <h2 class="offset-md-4">Request cash from a friend</h2>
+    <br>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col-md-6 offset-md-4">
+                <div class="form-group">
+                    <label class="form-label">Enter Amount</label>
+                    {{ form.amount }}
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="col-md-6 offset-md-4">
+                <div class="form-group">
+                  <label class="form-label">Requestee's Username</label>
+                  {{ form.requestee }}
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="col-md-6 offset-md-4">
+                <div class="form-group">
+                  <label class="form-label">Purpose</label>
+                  {{ form.message }}
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="offset-md-5">
+                <button name="login" class="col-md-2 btn btn-outline-success" id="login" type="submit">Send</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log in</a>
+{% endif %}
+
+
+{% endblock content %}

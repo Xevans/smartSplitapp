@@ -11,4 +11,8 @@
     <p>You are not logged in</p>
     <a href="{% url 'login' %}">Log in</a>
 {% endif %}
+
+<h2>Hello {{user.username}}!</h2>
+<h3>Your current balance: ${{request.user.profile.balance}}</h3>
+
 {% endblock content %}
