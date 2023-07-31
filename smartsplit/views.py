@@ -3,7 +3,8 @@ from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
 from .forms import sendMoneyForm, requestMoneyForm
 from accounts.models import Profile
-from .models import Requests
+from django.forms import ValidationError
+from .models import Requests, SentHistory
 from django.contrib.auth.models import User
 import decimal
 from django.db.models import Q # for making complex queries to the db
@@ -19,16 +20,20 @@ class Welcome(TemplateView):
 
 ### home view ###
 def homepage(request):
-    this_user = request.user.username # get this user's username
+    this_user = request.user.username # get current user's username
     requests_from_this_user = Requests.objects.filter(Q(sender=this_user)) # obtain a queryset containing every request object that meets the lookup criteria
     requests_to_this_user = Requests.objects.filter(Q(recipient=this_user))
+
+    payment_from_this_user = SentHistory.objects.filter(Q(sender=this_user))
+    payment_to_this_user = SentHistory.objects.filter(Q(recipient=this_user))
+    #print(payment_from_this_user.values_list())
     #print(this_user)
     #print(requests_from_this_user.values_list())
     #a = requests_from_this_user.values_list()
     
     #for records in requests_from_this_user:
         #print(records.recipient)
-    return render(request, "home.html", {'outgoing_requests':requests_from_this_user, 'incoming_requests':requests_to_this_user}) # name of queryset for template to reference : actual queryset in this function
+    return render(request, "home.html", {'outgoing_requests':requests_from_this_user, 'incoming_requests':requests_to_this_user, 'outgoing_payments':payment_from_this_user, 'incoming_payments':payment_to_this_user}) # name of queryset for template to reference : actual queryset in this function
 
 
 
@@ -54,30 +59,44 @@ def sendMoney(request):
             # add to recipient user's balance
             #commit changes
 
-            amount = form.cleaned_data['amount'] # amount to send
+            this_user = request.user.username # username of current user
+            this_amount = form.cleaned_data['amount'] # amount to send
             send_to = str(form.cleaned_data['recipient']) # username of recipient to send to
-            message = str(form.cleaned_data['message']) # message to send the recipient
+            this_message = str(form.cleaned_data['message']) # message to send the recipient
 
             
             # attempt to prevent leading zeroes and misconversions
-            x = decimal.Decimal(amount)
+            x = decimal.Decimal(this_amount)
             y = decimal.Decimal(request.user.profile.balance)
-            z = y - x
 
-            request.user.profile.balance = z
-            request.user.save()
+            if request.user.profile.balance < this_amount or this_amount < 0:
+                form = sendMoneyForm()
+                return render(request, "send_cash.html", {"form": form})
+                #raise ValidationError('Number must be positive')
+                
 
-            recipient = User.objects.get(**{User.USERNAME_FIELD: send_to})
+            else:
+                z = y - x
+                request.user.profile.balance = z
+                request.user.save()
+
+                recipient = User.objects.get(**{User.USERNAME_FIELD: send_to})
+                
+                x = decimal.Decimal(this_amount)
+                y = decimal.Decimal(recipient.profile.balance)
+                z = y + x
+
+                recipient.profile.balance = z
+                recipient.save()
+
+                # create and save new request object
+                new_payment = SentHistory.objects.create(sender=this_user, message=this_message, request_amount=this_amount, recipient=send_to)
+                new_payment.save()
             
-            x = decimal.Decimal(amount)
-            y = decimal.Decimal(recipient.profile.balance)
-            z = y + x
+                #print(recipient.profile.balance)
+                return HttpResponseRedirect('/send_success') # take to a success page confirming their payment was sent
 
-            recipient.profile.balance = z
-            recipient.save()
-            #print(recipient.profile.balance)
-            return HttpResponseRedirect('/send_success') # take to a success page confirming their payment was sent
-        
+
     else: # if GET request or any other method, create a blank form (render the page with the sendMoneyForm)
         form = sendMoneyForm()
 

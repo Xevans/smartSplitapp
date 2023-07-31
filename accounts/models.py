@@ -7,7 +7,7 @@ from PIL import Image
 class Profile(models.Model):
     # additional fields here
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(default='default.jpg', upload_to='profile_pictures')
+    avatar = models.ImageField(default='default.jpg', upload_to='media/profile_pictures/')
     bio = models.TextField()
     #groups
     balance = models.FloatField(default=5.00)

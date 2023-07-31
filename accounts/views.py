@@ -86,6 +86,10 @@ def profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+
+            request.user.profile = profile_form.avatar
+            request.user.save()
+            request.user.profile.save()
             messages.success(request, 'Your profile is updated successfully')
             return redirect(to='users-profile')
     else:

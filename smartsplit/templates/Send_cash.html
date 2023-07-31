@@ -1,70 +1,96 @@
 {% extends "base.html" %}
 
-{% block title %} SmartSplit | Send Cash {% endblock %}
+{% block title %} SmartSplit | My Account {% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
-<h1>Send Money</h1>
 
-<div class="container-fluid">
-    {% if form.errors %}
-    <div class="alert alert-danger alert-dismissible" role="alert">
-        <div id="form_errors">
-            {% for key, value in form.errors.items %}
-                <strong>{{ value }}</strong>
-            {% endfor %}
-        </div>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    {% endif %}
-<!--
-    {{request.user.requests.message}} 
-    {{request.user.requests.req_amnt}}-->
+<style>
+    .white_text {
+        font-size: 25px;
+        color: white;
+    }
 
-    <h2 class="offset-md-4">Send cash to a friend</h2>
+    .magenta_text {
+        font-size: 20px;
+        color: rgb(238, 92, 148);
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Background animation</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:900" rel="stylesheet">
+</head>
+
+<body style="background-color:#4f7a57;">
     <br>
-    <form method="POST">
-        {% csrf_token %}
-        <div class="form-row">
-            <div class="col-md-6 offset-md-4">
-                <div class="form-group">
-                    <label class="form-label">Enter Amount</label>
-                    {{ form.amount }}
+    <h1 style="color: white; font-size: 100px"><b>Send Money &#128184;</b></h1>
+    <br><br><br><br>
+
+    <div class="container-fluid">
+        {% if form.errors %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div id="form_errors">
+                {% for key, value in form.errors.items %}
+                <strong>{{ value }}</strong>
+                {% endfor %}
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+        <h2 class="offset-md-4" style="color: white; font-size: 50px;"><b>Send cash to a friend &#129297;</b></h2>
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-md-6 offset-md-4">
+                    <div class="form-group">
+                        <label class="form-label" style="color: white; font-size: 25px;"><b>Enter Amount</b></label>
+                        <br>
+                        {{ form.amount }}
+                    </div>
                 </div>
             </div>
-        </div>
-        <br>
-        <div class="form-row">
-            <div class="col-md-6 offset-md-4">
-                <div class="form-group">
-                  <label class="form-label">Recipient Username</label>
-                  {{ form.recipient }}
+            <br>
+            <div class="form-row">
+                <div class="col-md-6 offset-md-4">
+                    <div class="form-group">
+                        <label class="form-label" style="color: white; font-size: 25px;"><b>Recipient
+                                Username</b></label>
+                        <br>
+                        {{ form.recipient }}
+                    </div>
                 </div>
             </div>
-        </div>
-        <br>
-        <div class="form-row">
-            <div class="col-md-6 offset-md-4">
-                <div class="form-group">
-                  <label class="form-label">Purpose</label>
-                  {{ form.message }}
+            <div class="form-row">
+                <div class="col-md-6 offset-md-4">
+                    <div class="form-group">
+                        <br>
+                        <label class="form-label" style="color: white; font-size: 25px;"><b>Purpose</b></label>
+                        {{ form.message }}
+                        <br>
+                    </div>
                 </div>
             </div>
-        </div>
-        <br>
-        <div class="form-row">
-            <div class="offset-md-5">
-                <button name="login" class="col-md-2 btn btn-outline-success" id="login" type="submit">Send</button>
+            <br>
+            <div class="form-row">
+                <div class="offset-md-5">
+                    <button name="login" class="col-md-2 btn btn-success" id="login" type="submit">Send</button>
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
+
+</body>
 
 {% else %}
-    <p>You are not logged in</p>
-    <a href="{% url 'login' %}">Log in</a>
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log in</a>
 {% endif %}
 
 
