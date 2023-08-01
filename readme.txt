@@ -1,10 +1,10 @@
-Have to set up virtural environment ti run.
+Have to set up a virtual environment to run on a local host.
 IDE used: visual studio code
 
 setting up venv:
 1. in powershell run 'python -m venv .venv'
 
-1.5 if you dont have the powershell extention for VSC install it from the extentions tab then do step 1
+1.5 if you do not have the PowerShell extension for VSC install it from the extensions tab then do step 1
 
 2. run '.venv\Scripts\Activate.ps1' in the same directory at the manage.py file
 
