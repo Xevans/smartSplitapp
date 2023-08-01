@@ -8,6 +8,59 @@
 {% if user.is_authenticated %}
     <h1>Home Page</h1>
     <p>Hello, {{user.username}}.</p>
+    <br>
+
+    <!--Incoming Cash requests -->
+    {% if incoming_requests %}
+    <div class="card" style="width: 22rem;">
+        <div class="card-body">
+            <h4>Your incoming cash requests:</h4>
+            {% for record in incoming_requests %}
+            <p>From <b>{{ record.sender }}</b> for {{ record.request_amount }}. Reason: {{ record.message }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Outgoing Cash requests-->
+    {% if outgoing_requests %}
+    <div class="card" style="width: 22rem;">
+        <div class="card-body">
+            <h4>Your outgoing cash requests:</h4>
+            {% for record in outgoing_requests %}
+            <p>To <b>{{ record.recipient }}</b> for {{ record.request_amount }}. Reason: {{ record.message }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Outgoing Cash payment-->
+    {% if outgoing_payments %}
+    <div class="card" style="width: 22rem;">
+        <div class="card-body">
+            <h4>Your outgoing payments:</h4>
+            {% for record in outgoing_payments %}
+            <p>To <b>{{ record.recipient }}</b> for {{ record.request_amount }}. Reason: {{ record.message }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Incoming Cash payment-->
+    {% if incoming_payments %}
+    <div class="card" style="width: 22rem;">
+        <div class="card-body">
+            <h4>Your incoming payments:</h4>
+            {% for record in incoming_payments %}
+            <p>From <b>{{ record.sender }}</b> for {{ record.request_amount }}. Reason: {{ record.message }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+
+
+
 {% else %}
     <p>You are not logged in</p>
     <a href="{% url 'login' %}">Log in</a> |

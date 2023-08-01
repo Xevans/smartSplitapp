@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'smartsplit',
-    #'accounts.apps.AccountsConfig',
-    #'user_accounts',
     'accounts',
 ]
 

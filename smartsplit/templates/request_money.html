@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %} SmartSplit | My Account {% endblock %}
+{% block title %} SmartSplit | Request Money {% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
-<h1>Send Money</h1>
+<h1>Request Money</h1>
 
 <div class="container-fluid">
     {% if form.errors %}
@@ -19,7 +19,7 @@
         </button>
     </div>
     {% endif %}
-    <h2 class="offset-md-4">Send cash to a friend</h2>
+    <h2 class="offset-md-4">Request cash from a friend</h2>
     <br>
     <form method="POST">
         {% csrf_token %}
@@ -35,18 +35,17 @@
         <div class="form-row">
             <div class="col-md-6 offset-md-4">
                 <div class="form-group">
-                  <label class="form-label">Recipient Username</label>
-                  {{ form.recipient }}
+                  <label class="form-label">Requestee's Username</label>
+                  {{ form.requestee }}
                 </div>
             </div>
         </div>
+        <br>
         <div class="form-row">
             <div class="col-md-6 offset-md-4">
                 <div class="form-group">
-                    <br>
-                    <label class="form-label">Purpose</label>
-                    {{ form.message }}
-                    <br>
+                  <label class="form-label">Purpose</label>
+                  {{ form.message }}
                 </div>
             </div>
         </div>
