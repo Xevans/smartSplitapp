@@ -1,0 +1,14 @@
+{% extends "base.html" %} 
+
+{% block title %} SmartSplit | Send Friend Request {% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <h1>Send Friend Requests</h1>
+
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log in</a> |
+    <a href="{% url 'signup' %}">Create an account</a>
+{% endif %}
+{% endblock content %}

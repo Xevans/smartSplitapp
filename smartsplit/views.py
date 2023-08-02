@@ -124,6 +124,17 @@ def send_success(request):
     return render(request, "send_success.html")
 
 
+
 ### request_success view ###
 def request_success(request):
     return render(request, "request_success.html")
+
+
+
+def send_friend_request(request):
+    return render(request, "send_friend_request.html")
+
+
+
+def send_friend_request_success(request):
+    return render(request, "send_friend_request_success.html")

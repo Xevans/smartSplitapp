@@ -74,7 +74,18 @@ payment requests contain...
 sender username, amount, recipient name
 
 
-Front End todo's
+August 2
 
-Add a: Hello (name) your balance is (balance) on account page
-Add a: your new balance is (balance), (name).
+Class project submitted as only required functionality was needed.
+Continuing this project to learn more out of back and front end development.
+
+Todays task is to implement a friendList and friend request system that allows a user to send a friend request by entering their name into a form.
+When the other user visits their home page, thay will see a notification in their friend notification bar.
+The user can either accept or reject the request. The sender will not be notified on the status of their request unless it is accepted where the reciepient will now
+appear in their friend list and vice versa.
+
+Make a form to send friend requests.
+
+Additional functionality that could be built on this would be the ability to quick send requests or money.
+This would be through a drop down on the send money page or by opening the friend bar and clicking their name to recieve options.
+

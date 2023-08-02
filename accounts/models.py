@@ -5,16 +5,11 @@ from PIL import Image
 # Create your models here.
 
 class Profile(models.Model):
-    # additional fields here
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(default='default.jpg', upload_to='profile_pictures')
     bio = models.TextField()
-    #groups
     balance = models.FloatField(default=5.00)
     dues = models.FloatField(default=1.00)
-    #user_name = models.CharField(max_length=100, default)
-    # this_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    #phone number
 
     def __str__(self):
         return self.user.username
@@ -32,4 +27,13 @@ class Profile(models.Model):
     
 
 
+# Friend list Model
+class FriendList(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE) # every user has only one friend list
+    friend_id = models.IntegerField(default=0) # store the primary key of the friend here
+    friend_username = models.CharField(max_length=100, default="")
+    friend_name = models.CharField(max_length=100, default="")
+
+    def __str__(self):
+        return self.user.username
 
