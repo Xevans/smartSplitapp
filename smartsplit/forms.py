@@ -10,4 +10,9 @@ class sendMoneyForm(forms.Form):
 class requestMoneyForm(forms.Form):
     message = forms.CharField(max_length = 200, required = True, widget=forms.TextInput(attrs={'placeholder': 'Whats it for?'}))
     amount = forms.FloatField(required=True, widget=forms.TextInput(attrs={'placeholder': 'USD amount'}))
-    requestee = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'placeholder': 'Requestee username'}))                            
+    requestee = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'placeholder': 'Requestee username'}))            
+
+
+class sendFriendRequestForm(forms.Form):
+    message = forms.CharField(max_length = 200, required = True, widget=forms.TextInput(attrs={'placeholder': 'Whats it for?'}))
+    recipient = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'placeholder': 'Requestee username'}))                 

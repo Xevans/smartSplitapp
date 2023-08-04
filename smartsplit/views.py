@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
-from .forms import sendMoneyForm, requestMoneyForm
-from accounts.models import Profile
-from django.forms import ValidationError
-from .models import Requests, SentHistory
+from .forms import sendMoneyForm, requestMoneyForm, sendFriendRequestForm
+from .models import Requests, SentHistory, FriendRequests
+from accounts.models import FriendList
 from django.contrib.auth.models import User
 import decimal
 from django.db.models import Q # for making complex queries to the db
@@ -21,6 +20,14 @@ def homepage(request):
 
     payment_from_this_user = SentHistory.objects.filter(Q(sender=this_user))
     payment_to_this_user = SentHistory.objects.filter(Q(recipient=this_user))
+
+    incoming_friend_requests = FriendRequests.objects.filter(Q(recipient=this_user))
+
+    #if request.method == "POST":
+        # find out how to treat buttons
+        #do something with accept button
+        #do something with reject button
+
     #print(payment_from_this_user.values_list())
     #print(this_user)
     #print(requests_from_this_user.values_list())
@@ -42,7 +49,7 @@ def account(request):
 def sendMoney(request):
     if request.method == "POST":
         # creat a form instance and populate it based on what the user filled in the forms
-        form = sendMoneyForm(request.POST)
+        form = sendMoneyForm(request.POST) 
         
         if form.is_valid():
             # process data here
@@ -132,6 +139,24 @@ def request_success(request):
 
 
 def send_friend_request(request):
+    if request.method == "POST":
+        form = sendFriendRequestForm(request.POST) # create form obj with details from form on page
+        
+        if form.is_valid():
+            #extract form data
+            #create friend request object and save it
+            this_user = request.user.username
+            send_to = form.cleaned_data['recipient']
+            this_message = form.cleaned_data['message']
+
+            friend_request = FriendRequests.objects.create(sender=this_user, message=this_message, recipient=send_to, send_status=True)
+            friend_request.save()
+
+            return HttpResponseRedirect('/friend_request_success')
+        
+        else:
+            form = sendFriendRequestForm()
+
     return render(request, "send_friend_request.html")
 
 

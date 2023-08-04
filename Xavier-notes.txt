@@ -84,7 +84,8 @@ When the other user visits their home page, thay will see a notification in thei
 The user can either accept or reject the request. The sender will not be notified on the status of their request unless it is accepted where the reciepient will now
 appear in their friend list and vice versa.
 
-Make a form to send friend requests.
+Make a form to send friend requests.(X)
+Add HTML for friend bar()
 
 Additional functionality that could be built on this would be the ability to quick send requests or money.
 This would be through a drop down on the send money page or by opening the friend bar and clicking their name to recieve options.
