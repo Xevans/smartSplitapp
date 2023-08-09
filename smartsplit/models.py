@@ -20,13 +20,15 @@ class SentHistory(models.Model):
     
 # Friend request model
 class FriendRequests(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE) # every user has only one friend list
     sender = models.CharField(max_length=100, default="")
     message = models.CharField(max_length=100, default="")
     recipient = models.CharField(max_length=100, default="")
-    accept_status = models.BooleanField(default=False)
+    status = models.CharField(max_length=30, default="pending")
     send_status = models.BooleanField(default=False)
-    reject_status = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.user.username
+    
+
+# Friend list Model
+class FriendList(models.Model):
+    this_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    friend_username = models.CharField(max_length=100, default="")

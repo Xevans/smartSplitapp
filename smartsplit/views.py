@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
-from .forms import sendMoneyForm, requestMoneyForm, sendFriendRequestForm
-from .models import Requests, SentHistory, FriendRequests
-from accounts.models import FriendList
+from .forms import sendMoneyForm, requestMoneyForm, sendFriendRequestForm, acceptFriendRequestForm
+from .models import Requests, SentHistory, FriendRequests, FriendList
 from django.contrib.auth.models import User
 import decimal
 from django.db.models import Q # for making complex queries to the db
@@ -14,28 +13,60 @@ class Welcome(TemplateView):
 
 ### home view ###
 def homepage(request):
-    this_user = request.user.username # get current user's username
-    requests_from_this_user = Requests.objects.filter(Q(sender=this_user)) # obtain a queryset containing every request object that meets the lookup criteria
-    requests_to_this_user = Requests.objects.filter(Q(recipient=this_user))
 
-    payment_from_this_user = SentHistory.objects.filter(Q(sender=this_user))
-    payment_to_this_user = SentHistory.objects.filter(Q(recipient=this_user))
+    if request.method == "POST":
+        #print(request.POST['accept']) # prints name of sender
+        
+        # handle accept/reject friend request buttons
+        # POST contains a list of POST information. We want to see if either accept or reject as identified in the template have been sent
+        # if so, do something.
+        if 'accept' in request.POST:
 
-    incoming_friend_requests = FriendRequests.objects.filter(Q(recipient=this_user))
+            friend_request = FriendRequests.objects.get(sender=request.POST['accept']) # look up the friend request object that has a matching username.The name of the button is tied to its value. in this case, it is the name of the user who sent it
+            friend_request.status = "accept"
+            friend_request.save()
 
-    #if request.method == "POST":
-        # find out how to treat buttons
-        #do something with accept button
-        #do something with reject button
+            this_friend_username = request.POST['accept']
 
-    #print(payment_from_this_user.values_list())
-    #print(this_user)
-    #print(requests_from_this_user.values_list())
-    #a = requests_from_this_user.values_list()
+            new_friend = FriendList.objects.create(this_user=request.user, friend_username=this_friend_username)
+            new_friend.save()
+
+
+        if 'reject' in request.POST:
+            friend_request = FriendRequests.objects.get(sender=request.POST['accept'])
+            friend_request.status = "reject"
+            friend_request.save()
+
+            friend_request.delete()
+
+        return HttpResponseRedirect('/home')
     
-    #for records in requests_from_this_user:
-        #print(records.recipient)
-    return render(request, "home.html", {'outgoing_requests':requests_from_this_user, 'incoming_requests':requests_to_this_user, 'outgoing_payments':payment_from_this_user, 'incoming_payments':payment_to_this_user}) # name of queryset for template to reference : actual queryset in this function
+
+    else:
+        this_user = request.user.username # get current user's username
+        requests_from_this_user = Requests.objects.filter(Q(sender=this_user)) # obtain a queryset containing every request object that meets the lookup criteria
+        requests_to_this_user = Requests.objects.filter(Q(recipient=this_user))
+
+        payment_from_this_user = SentHistory.objects.filter(Q(sender=this_user))
+        payment_to_this_user = SentHistory.objects.filter(Q(recipient=this_user))
+
+        accepted_friend_requests = FriendRequests.objects.filter(Q(status="accept"))
+        incoming_friend_requests = FriendRequests.objects.filter(Q(recipient=this_user, status="pending")) # only show requests that are pending
+
+        for item in accepted_friend_requests:
+            new_friend = FriendList.objects.create(this_user=request.user, friend_username=item.recipient)
+            new_friend.save()
+            item.delete()
+
+
+        #print(payment_from_this_user.values_list())
+        #print(this_user)
+        #print(requests_from_this_user.values_list())
+        #a = requests_from_this_user.values_list()
+        
+        #for records in requests_from_this_user:
+            #print(records.recipient)
+        return render(request, "home.html", {'outgoing_requests':requests_from_this_user, 'incoming_requests':requests_to_this_user, 'outgoing_payments':payment_from_this_user, 'incoming_payments':payment_to_this_user, 'friend_requests':incoming_friend_requests}) # name of queryset for template to reference : actual queryset in this function
 
 
 
@@ -139,6 +170,10 @@ def request_success(request):
 
 
 def send_friend_request(request):
+    
+    friends = FriendList.objects.filter(Q(this_user=request.user))
+    print(friends)
+    
     if request.method == "POST":
         form = sendFriendRequestForm(request.POST) # create form obj with details from form on page
         
@@ -153,11 +188,10 @@ def send_friend_request(request):
             friend_request.save()
 
             return HttpResponseRedirect('/friend_request_success')
-        
-        else:
-            form = sendFriendRequestForm()
+    else:
+        form = sendFriendRequestForm()
 
-    return render(request, "send_friend_request.html")
+    return render(request, "send_friend_request.html", context={'form':form, 'friends':friends})
 
 
 

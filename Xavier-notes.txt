@@ -90,3 +90,33 @@ Add HTML for friend bar()
 Additional functionality that could be built on this would be the ability to quick send requests or money.
 This would be through a drop down on the send money page or by opening the friend bar and clicking their name to recieve options.
 
+August 4
+
+Friend requests show up on home page of recipient.
+The friend request objects are maintained within a global table called FriendRequests.
+
+Next goal is to add functionality to accept the friend requests.
+    On home: When user clicks on that particular request.
+    opens a modal that asks if the user wishes to accept or reject the user.
+    if accept, create new object for friend list table
+        delete friend request table entry
+    if reject, delete friend request table entry
+    Consider... what if friend req already sent?
+    check table before creating object. If it exists...
+    notify the user
+
+In order to store primary key of sender in friendList will have to store sender pk in friend request.
+
+
+
+August 5 button wont POST
+
+
+August 6
+Friends page now shows Friends.
+Next goal is to handle friend request object after recipient interatcs with it.
+
+when user visits home page, check the request status. If it is set to accept, dont show it.
+when the sender loads their home page and the request is accepted status AND they are the sender. Add the friend for the sender and delete the request obj
+make send_friend_request page a link on the friends page.
+re-write friend page to show friend. if no friend to show say "no friends"

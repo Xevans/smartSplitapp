@@ -6,6 +6,64 @@
 {% if user.is_authenticated %}
     <h1>Send Friend Requests</h1>
 
+
+    <div class="container-fluid">
+        {% if form.errors %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div id="form_errors">
+                {% for key, value in form.errors.items %}
+                    <strong>{{ value }}</strong>
+                {% endfor %}
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+        <h2 class="offset-md-4">Add a Friend</h2>
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-md-6 offset-md-4">
+                    <div class="form-group">
+                        <label class="form-label">Username of recipient</label>
+                        {{ form.recipient }}
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="form-row">
+                <div class="col-md-6 offset-md-4">
+                    <div class="form-group">
+                      <label class="form-label">Message</label>
+                      {{ form.message }}
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="form-row">
+                <div class="offset-md-5">
+                    <button name="send" class="col-md-2 btn btn-outline-success" id="login" type="submit">Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    
+    <!-- Friends -->
+    {% if friends %}
+    <div class="card" style="width: 22rem;">
+        <div class="card-body">
+            <h4>Friends List</h4>
+            {% for record in friends %}
+            <p><b>{{ record.friend_username }}</b></p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+
 {% else %}
     <p>You are not logged in</p>
     <a href="{% url 'login' %}">Log in</a> |

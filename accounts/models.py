@@ -27,15 +27,8 @@ class Profile(models.Model):
     
 
 
-# Friend list Model
-class FriendList(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE) # every user has only one friend list
-    friend_id = models.IntegerField(default=0) # store the primary key of the friend here
-    friend_username = models.CharField(max_length=100, default="")
-    friend_name = models.CharField(max_length=100, default="")
 
-    def __str__(self):
-        return self.user.username
+
 
 
 

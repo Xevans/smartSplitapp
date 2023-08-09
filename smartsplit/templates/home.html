@@ -58,6 +58,46 @@
     </div>
     {% endif %}
 
+    <!-- Incoming Friend Requests-->
+    {% if friend_requests %}
+    <div class="card" style="width: 22rem;">
+        <div class="card-body">
+            <h4>Friend Requests:</h4>
+            {% for record in friend_requests %}
+            <p>From <b>{{ record.sender }}</b>. Message: {{ record.message }}</p>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Check Message
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Accept Friend Request?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <b>{{ record.sender }}</b> <br>
+                    <p>Message: {{ record.message }}</p>
+                    </div>
+                    <div class="modal-footer">
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <button type="submit" name="reject" value="{{ record.sender }}" class="btn btn-secondary">Recept</button>
+                        <button type="submit" name="accept" value="{{ record.sender }}" class="btn btn-primary">Accept</button>
+                    </form>
+
+                    </div>
+                </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 
 
 
