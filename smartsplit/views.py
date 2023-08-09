@@ -14,6 +14,7 @@ class Welcome(TemplateView):
 ### home view ###
 def homepage(request):
 
+    #POST
     if request.method == "POST":
         #print(request.POST['accept']) # prints name of sender
         
@@ -33,7 +34,7 @@ def homepage(request):
 
 
         if 'reject' in request.POST:
-            friend_request = FriendRequests.objects.get(sender=request.POST['accept'])
+            friend_request = FriendRequests.objects.get(sender=request.POST['reject'])
             friend_request.status = "reject"
             friend_request.save()
 
@@ -41,7 +42,7 @@ def homepage(request):
 
         return HttpResponseRedirect('/home')
     
-
+    #GET
     else:
         this_user = request.user.username # get current user's username
         requests_from_this_user = Requests.objects.filter(Q(sender=this_user)) # obtain a queryset containing every request object that meets the lookup criteria
