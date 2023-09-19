@@ -1,12 +1,6 @@
-# smartSplitapp xavier 2 branch
+# smartSplitapp Zane 2 branch
 Group Term Project: web app for sending money and splitting bills with friends (Django framework)
 
-This branch exists as my personal extension of this web app. The purpose of this project is to enhance my understanding and explore more tools in Django.
+This branch exists as my personal extension of this web app. The purpose of this project is to enhance my understanding and explore more tools in Django with a focus on front-end development. 
 
-# Currently, this app is featured with the following:
-Secure Login,
-Secure Account Creation,
-Friending System,
-Money and account tracking system,
-Money transfer system,
-Money Request system
+This branch is based off the "xavier2" branch with all the updated features and will focus mainly on creating a more user friendly and modern UI. 
