@@ -120,3 +120,24 @@ when user visits home page, check the request status. If it is set to accept, do
 when the sender loads their home page and the request is accepted status AND they are the sender. Add the friend for the sender and delete the request obj
 make send_friend_request page a link on the friends page.
 re-write friend page to show friend. if no friend to show say "no friends"
+
+August 7
+Friend system implemented.
+
+More functionality is planned, but next I wish to style all of the pages to give an
+identity that is consistent and clean.
+
+Front end Tasks:
+
+- Send success alert on form completion (basically do not redirect. Show message. use JS to control timing)
+
+- notifications are currently categorized followed by their cards. This is good.
+    Now I just want to move it to an off canvas bar that is called with a notifications
+    button with a badge to indicated how many new notifications there are. Will require one to one model called...
+    system (to be more general) or notifications (to be more specific).
+
+- Each category on the side bar will be clickable that will take the user to a new page
+    For friends it will be the friends list. Where there will be a centered list of friends with a wheel like scroll
+    like in a game show where the biggest card/bubble is at the center and they get smaller and fade toward the ends.
+    For transactions. They will lead to transaction history showing a similar wheel however
+    the outgoing will be to the right and incoming going to the left with + and -.
